@@ -1,55 +1,78 @@
-:host { 
-    display: flex; 
-    justify-content: center; 
-    margin: 100px 0px; 
-} 
-
-mat-card { 
-    width: 400px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    padding: 20px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-} 
-
-mat-card-title { 
-    display: flex; 
-    justify-content: center; 
-    margin-top: 10px !important; 
+mat-card {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 10px;
+    text-align: center;
 }
 
-mat-card-subtitle { 
-    display: flex; 
-    justify-content: center; 
-} 
+mat-card-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
-mat-form-field { 
-    width: 100%; 
-    min-width: 360px; 
-} 
+mat-card-header img {
+    max-width: 400px;
+}
 
-mat-raised-button { 
-    display: flex; 
-    justify-content: center; 
-    width: 100%; 
-    min-width: 360px; 
-} 
+mat-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-input[type="text"], 
-input[type="password"] { 
-    width: 100%; 
-    box-sizing: border-box; 
-} 
+mat-card-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
 
-p.password-link, 
-p.register-link { 
-    width: 100%; 
-    text-align: center; 
-    margin-top: 10px; 
-} 
+.password-link {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
 
-button[type="submit"], 
-a.register-link { 
-    width: 100%; 
+.password-link a {
+    color: #666;
+    text-decoration: none;
+}
+
+.register-link {
+    margin-top: 20px;
+}
+
+.register-link a {
+    text-decoration: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+}
+
+button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.mat-form-field-underline {
+    bottom: -8px !important;
+}
+
+.mat-form-field-label {
+    transform: translateY(-12px);
+}
+
+.mat-error {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.mat-error+.mat-form-field-underline {
+    bottom: 0 !important;
 }
