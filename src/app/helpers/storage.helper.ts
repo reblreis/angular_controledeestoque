@@ -19,3 +19,10 @@ export function getData(key: string): any | null {
     else
         return null;
 }
+
+/*
+    Função para apagar dados da local storage
+*/
+export function removeData(key: string): void {
+    localStorage.removeItem(key);
+}

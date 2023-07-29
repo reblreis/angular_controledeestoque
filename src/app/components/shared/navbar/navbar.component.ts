@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { getData } from 'src/app/helpers/storage.helper';
+import { Router } from '@angular/router';
+import { getAuthData, signOut } from 'src/app/helpers/auth.helper';
+import { AutenticarResponseModel } from 'src/app/models/autenticar.response.model';
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +10,29 @@ import { getData } from 'src/app/helpers/storage.helper';
 })
 export class NavbarComponent implements OnInit {
 
+  //atributos
+  model: AutenticarResponseModel | null = null;
+
+  constructor(
+    private router: Router
+  ) {
+  }
+
   //evento executando antes do componente abrir
   ngOnInit(): void {
-    console.log(getData('auth'));
+    //capturar os dados do usuário autenticado
+    this.model = getAuthData();
+  }
+
+  logout(): void {
+    if (window.confirm(`Olá ${this.model?.nome}, deseja realmente sair do sistema?`)) {
+      //logout do usuário
+      signOut();
+      //redirecionamento
+      this.router.navigate(['/account/login'])
+        .then(() => {
+          window.location.reload();
+        });
+    }
   }
 }

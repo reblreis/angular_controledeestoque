@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { saveData } from 'src/app/helpers/storage.helper';
+import { signIn } from 'src/app/helpers/auth.helper';
 import { AutenticarRequestModel } from 'src/app/models/autenticar.request.model';
 import { autenticar } from 'src/app/services/autenticar.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -17,14 +18,16 @@ export class LoginComponent {
 
   //construtor
   constructor(
-    private router: Router //manipulação das rotas
+    private router: Router, //manipulação das rotas
+    private spinner: NgxSpinnerService //ngx-spinner
   ) {
   }
 
   //estrutura do formulário
   formLogin = new FormGroup({
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    password: new FormControl('', [Validators.required, 
+                                  Validators.minLength(8)])
   });
 
   //objeto para acessar os campos do formulário
@@ -34,6 +37,8 @@ export class LoginComponent {
 
   //função para processar o SUBMIT do formulário
   onSubmit() {
+
+    this.spinner.show();
 
     //dados da requisição
     const request = new AutenticarRequestModel(
@@ -46,9 +51,12 @@ export class LoginComponent {
       .subscribe({
         next: (data) => {
           //salvar os dados na local storage
-          saveData('auth', data);
+          signIn(data);
           //redirecionar para a página de dashboard
-          this.router.navigate(['/admin/dashboard']);
+          this.router.navigate(['/admin/dashboard'])
+            .then(() => {
+              window.location.reload();
+            });
         },
         error: (e) => {
           switch (e.response.status) {
@@ -60,6 +68,10 @@ export class LoginComponent {
               break;
           }
         }
+      })
+      .add(() => {
+        this.spinner.hide();
       });
+      
   }
 }
