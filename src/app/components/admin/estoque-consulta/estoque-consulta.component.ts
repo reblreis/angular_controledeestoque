@@ -81,7 +81,7 @@ export class EstoqueConsultaComponent implements OnInit {
         //função para edição 
         onEdit(model: DataSourceModel): void { 
           
-          this.router.navigate(['/admin/estoque-edicao', 1]); 
+          this.router.navigate(['/admin/estoque-edicao', model.id]); 
         }
 
         //função para donwload dos relatórios 

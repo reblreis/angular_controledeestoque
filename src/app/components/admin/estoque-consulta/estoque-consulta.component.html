@@ -28,7 +28,9 @@
             <!-- Coluna 'nome' --> 
             <ng-container matColumnDef="nome"> 
                 <mat-header-cell *matHeaderCellDef><strong>Nome do estoque</strong>
-                </mat-header-cell> <mat-cell *matCellDef="let estoque"> {{estoque.nome}}</mat-cell> 
+                </mat-header-cell> 
+                <mat-cell *matCellDef="let estoque"> 
+                    {{estoque.nome}}</mat-cell> 
             </ng-container>
 
             <!-- Coluna 'descrição' --> 
